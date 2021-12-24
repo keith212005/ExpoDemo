@@ -1,5 +1,6 @@
 ios/
 android/
+.history/
 node_modules/
 .expo/
 dist/
