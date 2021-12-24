@@ -5,9 +5,9 @@ module.exports = function (api) {
     plugins: [
       [
         "module-resolver",
-        {
-          root: ["./src"],
-          alias: [
+        
+          "root": ["./src"],
+          "alias": [
             { "@actions": "./src/actions" },
             { "@api": "./src/api" },
             { "@assets": "./src/assets" },
@@ -23,8 +23,8 @@ module.exports = function (api) {
             { "@storage": "./src/storage" },
             { "@utils": "./src/utils" },
           ],
-          extensions: [".js", ".jsx", ".ts", ".tsx"],
-        },
+          "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        
       ],
       ["react-native-reanimated/plugin"],
     ],
