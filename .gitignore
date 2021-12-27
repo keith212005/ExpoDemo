@@ -1,6 +1,9 @@
 ios/
 android/
 .history/
+google-services.json
+GoogleService-Info.plist
+
 node_modules/
 .expo/
 dist/

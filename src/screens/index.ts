@@ -1,3 +1,4 @@
 export { Home } from "./Home";
-export { Login } from "./Login";
-export { Signup } from "./Signup";
+export { Home as BottomTabNavigator } from "./Home";
+export * from "./Login";
+export * from "./Signup";

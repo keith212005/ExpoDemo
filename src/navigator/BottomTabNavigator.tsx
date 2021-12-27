@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import { StyleSheet, useColorScheme, Pressable } from "react-native";
 import { Home } from "screens/Home";
-import { RootTabParamList, RootTabScreenProps } from "types";
 // import Colors from "../constants/Colors";
 
 //
@@ -15,7 +14,7 @@ function TabBarIcon(props: {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator();
 export const BottomTabNavigator = () => {
   const colorScheme = useColorScheme() as any;
   return (
@@ -28,7 +27,7 @@ export const BottomTabNavigator = () => {
       <BottomTab.Screen
         name="Home"
         component={Home}
-        options={({}: RootTabScreenProps<"Home">) => ({
+        options={() => ({
           title: "Home",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (

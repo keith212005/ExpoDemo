@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/images/splash2.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -18,14 +18,16 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Keith212005.ExpoDemo"
+      "bundleIdentifier": "com.Keith212005.ExpoDemo",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.Keith212005.ExpoDemo"
+      "package": "com.Keith212005.ExpoDemo",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
