@@ -5,4 +5,5 @@ export const SCREENS = {
   BottomTabNavigator: "BottomTabNavigator",
 };
 
+export * from "./reducerTypes";
 export * from "./Layout";

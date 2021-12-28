@@ -37,12 +37,7 @@ export const StackNavigator = () => {
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? Dark : Light}
     >
-      <Stack.Navigator
-        initialRouteName={"Login"}
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         {_addScreen("Login" as never)}
         {_addScreen("Signup" as never)}
         {_addScreen("BottomTabNavigator" as never, true, {

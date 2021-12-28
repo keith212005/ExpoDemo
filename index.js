@@ -1,4 +1,5 @@
 import "expo-dev-client";
+import React from "react";
 
 import { registerRootComponent } from "expo";
 
