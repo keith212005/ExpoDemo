@@ -13,7 +13,12 @@ import isEmpty from "lodash/isEmpty";
 
 // LOCAL IMPORTS
 import { Input, SquareButton } from "@components";
-import { BottomTabNavigator, navigate, resetNavigation } from "@navigator";
+import {
+  BottomTabNavigator,
+  DrawerNavigator,
+  navigate,
+  resetNavigation,
+} from "@navigator";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { getUser, signIn } from "@services";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,11 +63,11 @@ export const Login = (props: any) => {
     return <Input label={label} {...extraProps} />;
   };
 
-  if (!isEmpty(userInfo)) return <BottomTabNavigator />;
+  if (!isEmpty(userInfo)) return <DrawerNavigator />;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.signin}>Sign In</Text>
+      <Text style={[styles.signin, { color: colors.text }]}>Sign In</Text>
       {_renderInput(0, "Email", {
         onChangeText: (text) => {
           setStates((prev: any) => {
@@ -78,11 +83,16 @@ export const Login = (props: any) => {
           });
         },
       })}
-      <SquareButton title={"Submit"} onPress={handleSubmit} />
-      <TouchableOpacity onPress={async () => navigate("Signup")}>
-        <Text style={[styles.signup, { color: colors.tint }]}>
-          New account? Signup
-        </Text>
+      <SquareButton
+        title={"Submit"}
+        onPress={handleSubmit}
+        containerStyle={{ marginTop: 20 }}
+      />
+      <TouchableOpacity
+        style={styles.signup}
+        onPress={async () => navigate("Signup")}
+      >
+        <Text style={[{ color: colors.text }]}>New account? Signup</Text>
       </TouchableOpacity>
     </View>
   );
@@ -97,10 +107,11 @@ const styles = StyleSheet.create({
   signup: {
     marginTop: 30,
     textAlign: "right",
+    alignSelf: "flex-end",
   },
   signin: {
     fontSize: 26,
     marginBottom: 40,
-    textAlign: "center",
+    alignSelf: "center",
   },
 });

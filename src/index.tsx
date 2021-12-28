@@ -13,6 +13,7 @@ import { store, persistor } from "./reducers";
 
 // LOCAL IMPORTS
 import useCachedResources from "./hooks/useCachedResources";
+import "react-native-gesture-handler";
 
 export const App = () => {
   LogBox.ignoreLogs(["If you want to use Reanimated 2"]);

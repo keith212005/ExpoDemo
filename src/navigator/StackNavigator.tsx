@@ -12,6 +12,7 @@ import { Light, Dark } from "@resources";
 import { navigationRef } from "./RootNavigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { BottomTabNavigator } from "./BottomTabNavigator";
+import { DrawerNavigator } from "./DrawerNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,8 +41,8 @@ export const StackNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {_addScreen("Login" as never)}
         {_addScreen("Signup" as never)}
-        {_addScreen("BottomTabNavigator" as never, true, {
-          component: BottomTabNavigator,
+        {_addScreen("DrawerNavigator" as never, true, {
+          component: DrawerNavigator,
         })}
       </Stack.Navigator>
     </NavigationContainer>

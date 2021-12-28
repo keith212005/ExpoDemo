@@ -57,7 +57,7 @@ export const Signup = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.signup}>Sign Up</Text>
+      <Text style={[styles.signup, { color: colors.text }]}>Sign Up</Text>
       {_renderInput(0, "Email", {
         onChangeText: (text) => {
           setStates((prev: any) => {
@@ -73,9 +73,16 @@ export const Signup = () => {
           });
         },
       })}
-      <SquareButton title={"Submit"} onPress={handleSubmit} />
-      <TouchableOpacity onPress={async () => resetNavigation("Login")}>
-        <Text style={[styles.signin, { color: colors.tint }]}>
+      <SquareButton
+        title={"Submit"}
+        onPress={handleSubmit}
+        containerStyle={{ marginTop: 20 }}
+      />
+      <TouchableOpacity
+        style={styles.signin}
+        onPress={async () => resetNavigation("Login")}
+      >
+        <Text style={[{ color: colors.tint }]}>
           Already have account? SignIn
         </Text>
       </TouchableOpacity>
@@ -96,6 +103,6 @@ const styles = StyleSheet.create({
   },
   signin: {
     marginTop: 30,
-    textAlign: "right",
+    alignSelf: "flex-end",
   },
 });
