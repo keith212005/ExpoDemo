@@ -1,10 +1,17 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { Text, View, StyleSheet, Pressable } from "react-native";
+
+// THIRD PARTY IMPORTS
+import {
+  useNavigation,
+  useTheme,
+  DrawerActions,
+} from "@react-navigation/native";
+import { FontAwesome, Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useNavigation, useTheme } from "@react-navigation/native";
-import * as React from "react";
-import { StyleSheet, useColorScheme, Pressable } from "react-native";
-import { Home } from "screens/Home";
-import { DrawerActions } from "@react-navigation/native";
+
+// LOCAL IMPORTS
+import * as Screen from "@screens";
+import { SCREENS } from "@constants";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -14,17 +21,74 @@ function TabBarIcon(props: {
 }
 
 const BottomTab = createBottomTabNavigator();
+
 export const BottomTabNavigator = () => {
   const { colors } = useTheme() as CustomTheme;
   const navigation = useNavigation();
+
+  /**
+  |--------------------------------------------------
+  | Global Declaration section end
+  |--------------------------------------------------
+  */
+
+  const _addScreen = (
+    routeName: keyof typeof SCREENS,
+    isNavigator?: boolean,
+    extraProps?: any
+  ) => {
+    return (
+      <BottomTab.Screen
+        name={routeName}
+        component={!isNavigator ? Screen[routeName] : routeName}
+        {...extraProps}
+      />
+    );
+  };
+
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: colors.tint,
-      }}
+        headerShown: true,
+        gestureEnabled: true,
+        headerLeft: ({ color }: any) => (
+          <FontAwesome
+            name="bars"
+            color={color}
+            size={30}
+            style={{ paddingHorizontal: 15 }}
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+          />
+        ),
+      })}
     >
-      <BottomTab.Screen
+      {_addScreen("Home", false, {
+        options: {
+          tabBarIcon: ({ color }: any) => (
+            <FontAwesome
+              name="home"
+              color={color}
+              size={30}
+              style={{ marginBottom: -10 }}
+            />
+          ),
+        },
+      })}
+      {_addScreen("Drinks", false, {
+        options: {
+          tabBarIcon: ({ color }: any) => (
+            <Entypo
+              name="drink"
+              color={color}
+              size={23}
+              style={{ marginBottom: -10 }}
+            />
+          ),
+        },
+      })}
+      {/* <BottomTab.Screen
         name="Home"
         component={Home}
         options={() => ({
@@ -33,9 +97,7 @@ export const BottomTabNavigator = () => {
           headerRight: () => (
             <Pressable
               onPress={() => {}}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
+              style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
             >
               <FontAwesome
                 name="info-circle"
@@ -46,25 +108,16 @@ export const BottomTabNavigator = () => {
             </Pressable>
           ),
           headerLeft: () => (
-            <Pressable
-              onPress={() => {
-                navigation.dispatch(DrawerActions.toggleDrawer());
-              }}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-                marginLeft: 20,
-              })}
-            >
-              <FontAwesome
-                name="bars"
-                size={25}
-                color={colors.text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+            <FontAwesome
+              name="bars"
+              size={25}
+              color={colors.text}
+              style={{ paddingHorizontal: 15 }}
+              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            />
           ),
         })}
-      />
+      /> */}
     </BottomTab.Navigator>
   );
 };
@@ -72,3 +125,6 @@ export const BottomTabNavigator = () => {
 const styles = StyleSheet.create({
   container: {},
 });
+function createStackNavigator() {
+  throw new Error("Function not implemented.");
+}

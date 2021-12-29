@@ -35,6 +35,7 @@
       "@api": ["./api"],
       "@components": ["./components"],
       "@constants": ["./constants"],
+      "@hooks": ["./hooks"],
       "@languages": ["./languages"],
       "@navigator": ["./navigator"],
       "@reducers": ["./reducers"],

@@ -3,6 +3,7 @@ export const SCREENS = {
   Login: "Login",
   Signup: "Signup",
   BottomTabNavigator: "BottomTabNavigator",
+  Drinks: "Drinks",
 };
 
 export * from "./reducerTypes";

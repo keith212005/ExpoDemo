@@ -1,6 +1,6 @@
 import React from "react";
 import { StackNavigator } from "@navigator";
-import { LogBox } from "react-native";
+import { ActivityIndicator, LogBox } from "react-native";
 
 // THIRD PARTY IMPORTS
 import { StatusBar } from "expo-status-bar";
@@ -30,7 +30,10 @@ export const App = () => {
       <SafeAreaProvider>
         <StatusBar />
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+          <PersistGate
+            loading={<ActivityIndicator size="small" color="#0000ff" />}
+            persistor={persistor}
+          >
             <StackNavigator />
           </PersistGate>
         </Provider>

@@ -14,6 +14,7 @@ module.exports = function (api) {
             { "@utils": "./src/utils/" },
             { "@components": "./src/components" },
             { "@constants": "./src/constants" },
+            { "@hooks": "./src/hooks" },
             { "@languages": "./src/languages" },
             { "@navigator": "./src/navigator" },
             { "@reducers": "./src/reducers" },

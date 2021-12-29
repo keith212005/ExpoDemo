@@ -28,6 +28,7 @@ export const StackNavigator = () => {
       <Stack.Screen
         name={routeName}
         component={!isNavigator ? Screen[routeName] : routeName}
+        options={{ animation: "fade" }}
         {...extraProps}
       />
     );
@@ -38,9 +39,18 @@ export const StackNavigator = () => {
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? Dark : Light}
     >
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {_addScreen("Login" as never)}
-        {_addScreen("Signup" as never)}
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      >
+        {_addScreen("Login" as never, false, {
+          options: { animation: "slide_from_right" },
+        })}
+        {_addScreen("Signup" as never, false, {
+          options: { animation: "slide_from_left" },
+        })}
         {_addScreen("DrawerNavigator" as never, true, {
           component: DrawerNavigator,
         })}

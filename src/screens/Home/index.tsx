@@ -1,21 +1,24 @@
 import { resetNavigation } from "@navigator";
+import { useNavigation } from "@react-navigation/core";
 import { signOut } from "@services";
 import { saveUserInfo } from "actions/saveUserInfo";
-import * as React from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Home = (props: any) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state: any) => {
-    console.log("state in home>>>>", state.userInfo.email);
-    return state.userInfo;
-  });
+  const userInfo = useSelector((state: any) => state.userInfo);
+  const navigation = useNavigation();
 
-  const handleSignOut = async () => {
+  if (Platform.OS === "web") {
+    navigation.setOptions({
+      tabBarStyle: { display: "none" },
+    });
+  }
+
+  const handleSignOut = () => {
     dispatch(saveUserInfo(""));
-    console.log(signOut());
-    //  signOut();
+    signOut();
     resetNavigation("Login");
   };
 
@@ -29,7 +32,5 @@ export const Home = (props: any) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  text: {
-    fontSize: 20,
-  },
+  text: { fontSize: 20 },
 });

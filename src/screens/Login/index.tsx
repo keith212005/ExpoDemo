@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -13,13 +13,8 @@ import isEmpty from "lodash/isEmpty";
 
 // LOCAL IMPORTS
 import { Input, SquareButton } from "@components";
-import {
-  BottomTabNavigator,
-  DrawerNavigator,
-  navigate,
-  resetNavigation,
-} from "@navigator";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { DrawerNavigator, navigate } from "@navigator";
+import { useTheme } from "@react-navigation/native";
 import { getUser, signIn } from "@services";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUserInfo } from "actions/saveUserInfo";
@@ -29,27 +24,17 @@ const initialState: any = {
   password: "",
 };
 
-export const Login = (props: any) => {
+export const Login = () => {
   const { colors } = useTheme() as CustomTheme;
   const [state, setStates] = useState(initialState);
   const dispatch = useDispatch();
-  const userInfo = useSelector((state: any) => {
-    console.log("userinfo in Login>>>>>", state.userInfo);
-    return state.userInfo;
-  });
-  const navigation = useNavigation();
+  const userInfo = useSelector((state: any) => state.userInfo);
 
   const handleSubmit = () => {
     if (!isEmpty(state.email) && !isEmpty(state.password)) {
       signIn({ email: state.email, password: state.password })
-        .then(() => {
-          dispatch(saveUserInfo(getUser()));
-          resetNavigation("BottomTabNavigator");
-        })
-        .catch((err) => {
-          console.log(err);
-          Alert.alert(JSON.stringify(err));
-        });
+        .then(() => dispatch(saveUserInfo(getUser())))
+        .catch((err) => Alert.alert(JSON.stringify(err)));
     } else {
       Alert.alert("Email or Password cannot be empty");
     }
@@ -60,7 +45,7 @@ export const Login = (props: any) => {
     label: string,
     extraProps: TextInputProps
   ) => {
-    return <Input label={label} {...extraProps} />;
+    return <Input label={label} placeholder={label} {...extraProps} />;
   };
 
   if (!isEmpty(userInfo)) return <DrawerNavigator />;
@@ -92,7 +77,7 @@ export const Login = (props: any) => {
         style={styles.signup}
         onPress={async () => navigate("Signup")}
       >
-        <Text style={[{ color: colors.text }]}>New account? Signup</Text>
+        <Text style={[{ color: colors.tint }]}>New account? Signup</Text>
       </TouchableOpacity>
     </View>
   );
