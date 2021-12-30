@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 // THIRD PARTY IMPORTS
 import {
@@ -48,11 +48,12 @@ export const BottomTabNavigator = () => {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Drinks"
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: colors.tint,
         headerShown: true,
         gestureEnabled: true,
+        tabBarStyle: { display: Platform.OS === "web" ? "none" : undefined },
         headerLeft: ({ color }: any) => (
           <FontAwesome
             name="bars"

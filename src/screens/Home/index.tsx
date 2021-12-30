@@ -10,12 +10,6 @@ export const Home = (props: any) => {
   const userInfo = useSelector((state: any) => state.userInfo);
   const navigation = useNavigation();
 
-  if (Platform.OS === "web") {
-    navigation.setOptions({
-      tabBarStyle: { display: "none" },
-    });
-  }
-
   const handleSignOut = () => {
     dispatch(saveUserInfo(""));
     signOut();

@@ -32,7 +32,7 @@ export const ProgressiveImage = (props: ProgressiveImageProps): any => {
   };
 
   return (
-    <View style={[styles.container, { ...style }]}>
+    <View style={[styles.container, style]}>
       <Animated.Image
         {...props}
         source={thumbnailSource}

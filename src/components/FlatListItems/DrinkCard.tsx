@@ -1,36 +1,75 @@
 import React from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Text, View } from "react-native";
 
 // LOCAL IMPORTS
-import { ProgressiveImage } from "@components";
-import { responsiveWidth, scale, verticalScale } from "@resources";
+import { Card, ProgressiveImage } from "@components";
+import { responsiveWidth } from "@resources";
+import { useGlobalStyles } from "@hooks";
+
+// THIRD PARTY IMPORTS
+import { ScaledSheet, moderateScale, scale } from "react-native-size-matters";
 
 interface DrinkCardProps {
   item: any;
 }
 
 export const DrinkCard = (props: DrinkCardProps) => {
+  const { textStyle, squareLayout, layoutDirection } = useGlobalStyles();
+
+  const _renderText = (title: string, text: string) => {
+    return (
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text
+          style={[{ ...textStyle(moderateScale(11), "text", "NUNITO_BOLD") }]}
+        >
+          {title}
+        </Text>
+
+        <View style={{ flex: 1 }}>
+          <Text
+            style={[
+              {
+                ...textStyle(moderateScale(9), "text", "NUNITO_BOLD_ITALIC"),
+              },
+            ]}
+          >
+            {text}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
-    <View style={styles.container}>
+    <Card style={styles.inputContainer}>
       <ProgressiveImage
         source={{ uri: props.item.strDrinkThumb }}
-        style={{ aspectRatio: 1, width: responsiveWidth(20), borderRadius: 8 }}
+        style={[styles.image, { ...squareLayout(scale(100)) }]}
         resizeMode="cover"
       />
-      <Text style={styles.drinkName}>{props.item.strDrink}</Text>
-    </View>
+      <View style={{ marginLeft: 10, flex: 9 }}>
+        {_renderText("Name: ", props.item.strDrink)}
+        {_renderText("Category: ", props.item.strCategory)}
+        {_renderText("Glass Type: ", props.item.strGlass)}
+        {_renderText("Type: ", props.item.strAlcoholic)}
+        {_renderText("Type: ", props.item.strInstructions)}
+      </View>
+    </Card>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flexWrap: "wrap",
-    paddingVertical: verticalScale(10),
-    paddingHorizontal: verticalScale(20),
+const styles = ScaledSheet.create({
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    padding: moderateScale(10),
+    margin: moderateScale(10),
   },
+  image: {
+    borderRadius: 8,
+  },
+
   drinkName: {
-    width: scale(80),
-    textAlign: "center",
+    width: responsiveWidth(20),
   },
 });

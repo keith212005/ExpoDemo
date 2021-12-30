@@ -4,3 +4,4 @@ export * from "./Drawer";
 export * from "./Loader";
 export * from "./FlatListItems";
 export * from "./ProgressiveImage";
+export * from "./HOC";

@@ -11,35 +11,44 @@ import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { saveUserInfo } from "actions/saveUserInfo";
 import { signOut } from "@services";
 import { navigate, resetNavigation } from "@navigator";
-import { useNavigation } from "@react-navigation/core";
+import { useTheme } from "@react-navigation/native";
 
 export const DrawerContent = (props: any) => {
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const userInfo = useSelector((state: any) => state.userInfo);
+  const { colors } = useTheme();
 
   return (
     <View style={[styles.container, { marginTop: insets.top }]}>
       <View style={styles.header}>
-        <Text style={styles.welcome}>Welcome!</Text>
-        <Text>{userInfo.email}</Text>
+        <Text style={[{ color: colors.text }, styles.welcome]}>Welcome!</Text>
+        <Text style={[{ color: colors.text }]}>{userInfo.email}</Text>
       </View>
       <DrawerContentScrollView {...props} bounces={true}>
         <DrawerItem
-          icon={({}) => <MaterialCommunityIcons name="home" size={22} />}
+          icon={({}) => (
+            <MaterialCommunityIcons name="home" size={22} color={colors.text} />
+          )}
           label={"Home"}
           labelStyle={{}}
           onPress={() => navigate("Home")}
         />
         <DrawerItem
           style={{}}
-          icon={({}) => <Entypo name="drink" size={20} />}
+          icon={({}) => <Entypo name="drink" size={20} color={colors.text} />}
           label={"Drinks"}
           labelStyle={{}}
           onPress={() => navigate("Drinks")}
         />
         <DrawerItem
-          icon={({}) => <MaterialCommunityIcons name="logout" size={22} />}
+          icon={({}) => (
+            <MaterialCommunityIcons
+              name="logout"
+              size={22}
+              color={colors.text}
+            />
+          )}
           label={"Logout"}
           labelStyle={{}}
           onPress={() => {

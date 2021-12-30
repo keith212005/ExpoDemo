@@ -1,6 +1,6 @@
 import React from "react";
 import { StackNavigator } from "@navigator";
-import { ActivityIndicator, LogBox } from "react-native";
+import { ActivityIndicator, LogBox, Text } from "react-native";
 
 // THIRD PARTY IMPORTS
 import { StatusBar } from "expo-status-bar";
@@ -14,6 +14,7 @@ import { store, persistor } from "./reducers";
 // LOCAL IMPORTS
 import useCachedResources from "./hooks/useCachedResources";
 import "react-native-gesture-handler";
+import { Loader } from "@components";
 
 export const App = () => {
   LogBox.ignoreLogs(["If you want to use Reanimated 2"]);
@@ -24,7 +25,7 @@ export const App = () => {
   const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {
-    return null;
+    return <Loader />;
   } else {
     return (
       <SafeAreaProvider>
