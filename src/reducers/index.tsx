@@ -8,10 +8,12 @@ import { persistStore, persistReducer } from "redux-persist";
 import { REDUCER_TYPE } from "@constants";
 import { saveNetwork } from "./networkReducer";
 import { saveUserInfo } from "./saveUserInfo";
+import { setDrinkList } from "./setDrinkList";
 
 const appReducer = combineReducers({
   isOnline: saveNetwork,
   userInfo: saveUserInfo,
+  drinkList: setDrinkList,
 });
 
 const rootReducer = (state: any, action: any) => {

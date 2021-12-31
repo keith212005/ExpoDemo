@@ -1,5 +1,4 @@
 import { useTheme } from "@react-navigation/native";
-import { ViewStyle } from "react-native";
 import { fonts } from "resources/fonts";
 
 export const useGlobalStyles = () => {
@@ -17,7 +16,7 @@ export const useGlobalStyles = () => {
     };
   };
 
-  const layoutDirection = (
+  const layoutDirection: any = (
     flexDirection: string,
     justifyContent: string,
     alignItems: string

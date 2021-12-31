@@ -19,7 +19,6 @@ const cardStyles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.26,
     elevation: 8,
-
     borderRadius: 10,
   },
 });

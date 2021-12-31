@@ -1,31 +1,41 @@
-import React from "react";
-import { View, StyleSheet, FlatList, Platform } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import { View, StyleSheet } from "react-native";
+
+// THIRD PARTY IMPORTS
+import isEmpty from "lodash.isempty";
 
 // LOCAL IMPORTS
-import { useFetch } from "hooks";
-import { DrinkCard, Loader } from "@components";
-import { useNavigation } from "@react-navigation/core";
+import { SearchBar } from "./searchBar";
+import { DrinkList } from "./DrinkList";
 
 export const Drinks = () => {
-  const navigation = useNavigation();
-  const { data, loading, error } = useFetch(
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=m"
-  );
+  let inputRef = useRef(null);
+  let flatListRef = useRef<any>(null);
+  const [search, setSearch] = useState("");
 
-  const renderFlatListItem = ({ item }: any) => {
-    return <DrinkCard item={item} />;
-  };
+  useEffect(() => {
+    if (!isEmpty(search)) {
+      const timer = setTimeout(() => flatListRef.current?.search(search), 700);
+      return () => clearTimeout(timer);
+    } else {
+      flatListRef?.current?.search("");
+    }
+  }, [search]);
 
-  if (loading) return <Loader />;
+  /**
+  |--------------------------------------------------
+  | Global area end
+  |--------------------------------------------------
+  */
 
   return (
     <View style={styles.container}>
-      <FlatList
-        bounces={false}
-        data={data?.drinks}
-        renderItem={renderFlatListItem}
-        keyExtractor={(item) => item.idDrink}
+      <SearchBar
+        refs={inputRef}
+        onChangeText={(text) => setSearch(text)}
+        onCancel={() => flatListRef?.current?.search("")}
       />
+      <DrinkList ref={flatListRef} searchString={search} />
     </View>
   );
 };

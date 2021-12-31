@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Text, View } from "react-native";
 
 // LOCAL IMPORTS
@@ -13,14 +13,20 @@ interface DrinkCardProps {
   item: any;
 }
 
-export const DrinkCard = (props: DrinkCardProps) => {
+export const DrinkCards = (props: DrinkCardProps) => {
   const { textStyle, squareLayout, layoutDirection } = useGlobalStyles();
+  console.log("Drink Card Render......");
 
   const _renderText = (title: string, text: string) => {
     return (
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={[{ ...layoutDirection("row", "flex-start", "center") }]}>
         <Text
-          style={[{ ...textStyle(moderateScale(11), "text", "NUNITO_BOLD") }]}
+          style={[
+            {
+              ...textStyle(moderateScale(11), "text", "NUNITO_BOLD"),
+              alignSelf: "flex-start",
+            },
+          ]}
         >
           {title}
         </Text>
@@ -29,7 +35,8 @@ export const DrinkCard = (props: DrinkCardProps) => {
           <Text
             style={[
               {
-                ...textStyle(moderateScale(9), "text", "NUNITO_BOLD_ITALIC"),
+                ...textStyle(moderateScale(8), "text", "NUNITO_REGULAR"),
+                textAlign: "justify",
               },
             ]}
           >
@@ -58,6 +65,8 @@ export const DrinkCard = (props: DrinkCardProps) => {
   );
 };
 
+export const DrinkCard = memo(DrinkCards);
+
 const styles = ScaledSheet.create({
   inputContainer: {
     flex: 1,
@@ -68,8 +77,8 @@ const styles = ScaledSheet.create({
   image: {
     borderRadius: 8,
   },
-
   drinkName: {
     width: responsiveWidth(20),
   },
+  renderTextContainer: {},
 });
